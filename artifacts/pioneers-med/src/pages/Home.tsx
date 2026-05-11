@@ -40,7 +40,7 @@ export default function Home() {
             <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground shadow-md">
               <Stethoscope size={24} />
             </div>
-            <span className="font-bold text-xl tracking-tight text-primary">رواد كلية الطب</span>
+            <span className="font-bold text-xl tracking-tight text-primary">رواد كلية الطب ورقلة</span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-semibold">
             <a href="#about" className="hover:text-primary transition-colors">من نحن</a>
@@ -106,7 +106,7 @@ export default function Home() {
             >
               <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-6 text-primary">أين يلتقي العلم بالإنسانية</motion.h2>
               <motion.p variants={fadeInUp} className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                في "رواد كلية الطب"، نؤمن بأن الطب ليس مجرد مهنة نكتسبها بعد سنوات من الدراسة، بل هو رسالة نبيلة تبدأ منذ اليوم الأول في الكلية.
+                في "رواد كلية الطب ورقلة"، نؤمن بأن الطب ليس مجرد مهنة نكتسبها بعد سنوات من الدراسة، بل هو رسالة نبيلة تبدأ منذ اليوم الأول في الكلية.
               </motion.p>
               <motion.p variants={fadeInUp} className="text-lg text-muted-foreground leading-relaxed mb-8">
                 نحن بيئة حاضنة للطلاب، نسعى لسد الفجوة بين الحياة الأكاديمية والعمل المجتمعي، لبناء طبيب متكامل يمتلك المعرفة، المهارة، والرحمة.
@@ -296,7 +296,7 @@ export default function Home() {
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-3">
                 <Stethoscope size={24} className="text-primary" />
-                <span className="font-bold text-xl text-foreground">رواد كلية الطب</span>
+                <span className="font-bold text-xl text-foreground">رواد كلية الطب ورقلة</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground text-sm">
                 <MapPin size={14} className="text-accent shrink-0" />
@@ -317,7 +317,7 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} رواد كلية الطب. جميع الحقوق محفوظة.
+            © {new Date().getFullYear()} رواد كلية الطب ورقلة. جميع الحقوق محفوظة.
           </div>
         </div>
       </footer>
