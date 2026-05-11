@@ -41,6 +41,8 @@ const staggerContainer = {
 export default function Home() {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     fullName: "",
     birthDate: "",
@@ -55,9 +57,38 @@ export default function Home() {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_KEY,
+          subject: `طلب انضمام جديد — ${form.fullName}`,
+          from_name: "رواد كلية الطب ورقلة",
+          "الاسم واللقب": form.fullName,
+          "تاريخ الميلاد": form.birthDate,
+          "مكان الميلاد": form.birthPlace,
+          "الكلية": form.faculty,
+          "السنة الدراسية": form.year,
+          "ما يمكن تقديمه": form.contribution,
+          "وسيلة التواصل": form.contact,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setError("حدث خطأ أثناء الإرسال. يرجى المحاولة مجدداً.");
+      }
+    } catch {
+      setError("تعذّر الاتصال. تحقق من الإنترنت وحاول مجدداً.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   function handleClose(val: boolean) {
@@ -65,6 +96,7 @@ export default function Home() {
     if (!val) {
       setTimeout(() => {
         setSubmitted(false);
+        setError("");
         setForm({ fullName: "", birthDate: "", birthPlace: "", faculty: "", year: "", contribution: "", contact: "" });
       }, 300);
     }
