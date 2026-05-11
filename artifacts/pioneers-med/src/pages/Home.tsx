@@ -62,27 +62,24 @@ export default function Home() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch(`${import.meta.env.BASE_URL}api/join`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3FORMS_KEY,
-          subject: `طلب انضمام جديد — ${form.fullName}`,
-          from_name: "رواد كلية الطب ورقلة",
-          "الاسم واللقب": form.fullName,
-          "تاريخ الميلاد": form.birthDate,
-          "مكان الميلاد": form.birthPlace,
-          "الكلية": form.faculty,
-          "السنة الدراسية": form.year,
-          "ما يمكن تقديمه": form.contribution,
-          "وسيلة التواصل": form.contact,
+          fullName: form.fullName,
+          birthDate: form.birthDate,
+          birthPlace: form.birthPlace,
+          faculty: form.faculty,
+          year: form.year,
+          contribution: form.contribution,
+          contact: form.contact,
         }),
       });
-      const data = await res.json();
+      const data = await res.json() as { success: boolean; message?: string };
       if (data.success) {
         setSubmitted(true);
       } else {
-        setError("حدث خطأ أثناء الإرسال. يرجى المحاولة مجدداً.");
+        setError(data.message || "حدث خطأ أثناء الإرسال. يرجى المحاولة مجدداً.");
       }
     } catch {
       setError("تعذّر الاتصال. تحقق من الإنترنت وحاول مجدداً.");
