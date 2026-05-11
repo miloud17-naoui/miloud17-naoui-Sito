@@ -9,7 +9,8 @@ import {
   Megaphone,
   UserPlus,
   Mail,
-  ChevronLeft
+  ChevronLeft,
+  MapPin
 } from "lucide-react";
 import heroImg from "../assets/images/hero.png";
 import volunteerImg from "../assets/images/volunteer.png";
@@ -292,9 +293,15 @@ export default function Home() {
       <footer className="bg-background border-t border-border py-12">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-3">
-              <Stethoscope size={24} className="text-primary" />
-              <span className="font-bold text-xl text-foreground">رواد كلية الطب</span>
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-3">
+                <Stethoscope size={24} className="text-primary" />
+                <span className="font-bold text-xl text-foreground">رواد كلية الطب</span>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                <MapPin size={14} className="text-accent shrink-0" />
+                <span>ولاية ورقلة، الجزائر</span>
+              </div>
             </div>
             <p className="text-muted-foreground font-medium text-center">
               رواد في العلم... رواد في العطاء... ومخلصون للمهنة.
