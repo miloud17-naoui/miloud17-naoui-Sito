@@ -508,13 +508,27 @@ export default function Home() {
                         />
                       </div>
 
+                      {error && (
+                        <p className="text-destructive text-sm text-center font-medium">{error}</p>
+                      )}
+
                       <button
                         type="submit"
                         data-testid="button-submit-form"
-                        className="w-full bg-primary text-primary-foreground py-4 rounded-xl font-bold text-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-md hover:-translate-y-0.5"
+                        disabled={loading}
+                        className="w-full bg-primary text-primary-foreground py-4 rounded-xl font-bold text-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-md hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed"
                       >
-                        <Send size={18} />
-                        إرسال الطلب
+                        {loading ? (
+                          <>
+                            <span className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                            جاري الإرسال...
+                          </>
+                        ) : (
+                          <>
+                            <Send size={18} />
+                            إرسال الطلب
+                          </>
+                        )}
                       </button>
                     </form>
                   </>
