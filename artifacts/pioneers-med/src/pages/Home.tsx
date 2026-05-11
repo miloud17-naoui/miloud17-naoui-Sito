@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { motion } from "framer-motion";
 import { 
   Heart, 
@@ -10,8 +10,17 @@ import {
   UserPlus,
   Mail,
   ChevronLeft,
-  MapPin
+  MapPin,
+  CheckCircle2,
+  Send
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import heroImg from "../assets/images/hero.png";
 import volunteerImg from "../assets/images/volunteer.png";
 import teamImg from "../assets/images/team.png";
@@ -30,6 +39,37 @@ const staggerContainer = {
 };
 
 export default function Home() {
+  const [open, setOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({
+    fullName: "",
+    birthDate: "",
+    birthPlace: "",
+    faculty: "",
+    year: "",
+    contribution: "",
+    contact: "",
+  });
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSubmitted(true);
+  }
+
+  function handleClose(val: boolean) {
+    setOpen(val);
+    if (!val) {
+      setTimeout(() => {
+        setSubmitted(false);
+        setForm({ fullName: "", birthDate: "", birthPlace: "", faculty: "", year: "", contribution: "", contact: "" });
+      }, 300);
+    }
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden font-sans selection:bg-accent/30">
       
@@ -278,13 +318,177 @@ export default function Home() {
               انضم إلينا اليوم لتكن جزءاً من التغيير، طور مهاراتك، وساهم في بناء مجتمع طبي واعٍ ومسؤول.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button data-testid="button-join-form" className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/90 transition-all shadow-lg hover:-translate-y-1 w-full sm:w-auto">
+              <button
+                data-testid="button-join-form"
+                onClick={() => setOpen(true)}
+                className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/90 transition-all shadow-lg hover:-translate-y-1 w-full sm:w-auto flex items-center justify-center gap-2"
+              >
+                <Send size={18} />
                 نموذج الانضمام
               </button>
               <button data-testid="button-contact-us" className="bg-transparent border-2 border-primary text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/5 transition-all w-full sm:w-auto">
                 تواصل معنا
               </button>
             </div>
+
+            <Dialog open={open} onOpenChange={handleClose}>
+              <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto" dir="rtl">
+                {submitted ? (
+                  <div className="flex flex-col items-center justify-center py-12 text-center gap-4">
+                    <CheckCircle2 size={64} className="text-secondary" />
+                    <h3 className="text-2xl font-black text-foreground">تم إرسال طلبك بنجاح!</h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      شكراً لاهتمامك بالانضمام إلى خلية رواد كلية الطب ورقلة.<br />
+                      سنتواصل معك قريباً.
+                    </p>
+                    <button
+                      onClick={() => handleClose(false)}
+                      className="mt-4 bg-primary text-primary-foreground px-8 py-3 rounded-full font-bold hover:bg-primary/90 transition-all"
+                    >
+                      إغلاق
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <DialogHeader className="mb-2">
+                      <DialogTitle className="text-2xl font-black text-primary text-right">نموذج الانضمام</DialogTitle>
+                      <DialogDescription className="text-right">
+                        انضم إلى خلية رواد كلية الطب ورقلة — أكمل البيانات أدناه وسنتواصل معك.
+                      </DialogDescription>
+                    </DialogHeader>
+
+                    <form onSubmit={handleSubmit} className="space-y-5">
+
+                      {/* الاسم واللقب */}
+                      <div>
+                        <label className="block text-sm font-bold text-foreground mb-1">الاسم واللقب <span className="text-destructive">*</span></label>
+                        <input
+                          data-testid="input-full-name"
+                          name="fullName"
+                          value={form.fullName}
+                          onChange={handleChange}
+                          required
+                          placeholder="مثال: محمد بن علي"
+                          className="w-full border border-border rounded-xl px-4 py-3 bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary text-right"
+                        />
+                      </div>
+
+                      {/* تاريخ ومكان الميلاد */}
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-sm font-bold text-foreground mb-1">تاريخ الميلاد <span className="text-destructive">*</span></label>
+                          <input
+                            data-testid="input-birth-date"
+                            name="birthDate"
+                            type="date"
+                            value={form.birthDate}
+                            onChange={handleChange}
+                            required
+                            className="w-full border border-border rounded-xl px-4 py-3 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-right"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-bold text-foreground mb-1">مكان الميلاد <span className="text-destructive">*</span></label>
+                          <input
+                            data-testid="input-birth-place"
+                            name="birthPlace"
+                            value={form.birthPlace}
+                            onChange={handleChange}
+                            required
+                            placeholder="مثال: ورقلة"
+                            className="w-full border border-border rounded-xl px-4 py-3 bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary text-right"
+                          />
+                        </div>
+                      </div>
+
+                      {/* الكلية */}
+                      <div>
+                        <label className="block text-sm font-bold text-foreground mb-2">الكلية <span className="text-destructive">*</span></label>
+                        <div className="flex gap-3">
+                          {["كلية الطب", "كلية الصيدلة"].map(opt => (
+                            <label
+                              key={opt}
+                              data-testid={`radio-faculty-${opt}`}
+                              className={`flex-1 flex items-center justify-center gap-2 border-2 rounded-xl py-3 px-4 cursor-pointer font-semibold transition-all ${form.faculty === opt ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-primary/40"}`}
+                            >
+                              <input
+                                type="radio"
+                                name="faculty"
+                                value={opt}
+                                checked={form.faculty === opt}
+                                onChange={handleChange}
+                                required
+                                className="hidden"
+                              />
+                              {opt}
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* السنة الدراسية */}
+                      <div>
+                        <label className="block text-sm font-bold text-foreground mb-1">السنة الدراسية <span className="text-destructive">*</span></label>
+                        <select
+                          data-testid="select-year"
+                          name="year"
+                          value={form.year}
+                          onChange={handleChange}
+                          required
+                          className="w-full border border-border rounded-xl px-4 py-3 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-right"
+                        >
+                          <option value="">اختر السنة</option>
+                          <option value="السنة الأولى">السنة الأولى</option>
+                          <option value="السنة الثانية">السنة الثانية</option>
+                          <option value="السنة الثالثة">السنة الثالثة</option>
+                          <option value="السنة الرابعة">السنة الرابعة</option>
+                          <option value="السنة الخامسة">السنة الخامسة</option>
+                          <option value="السنة السادسة">السنة السادسة</option>
+                        </select>
+                      </div>
+
+                      {/* ما يمكنك تقديمه */}
+                      <div>
+                        <label className="block text-sm font-bold text-foreground mb-1">ما الذي يمكنك تقديمه للخلية؟ <span className="text-destructive">*</span></label>
+                        <textarea
+                          data-testid="textarea-contribution"
+                          name="contribution"
+                          value={form.contribution}
+                          onChange={handleChange}
+                          required
+                          rows={3}
+                          placeholder="مثال: التصميم الجرافيكي، التنظيم، الإعلام، العمل الميداني..."
+                          className="w-full border border-border rounded-xl px-4 py-3 bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary text-right resize-none"
+                        />
+                      </div>
+
+                      {/* وسيلة التواصل */}
+                      <div>
+                        <label className="block text-sm font-bold text-foreground mb-1">رقم الهاتف أو Gmail للتواصل <span className="text-destructive">*</span></label>
+                        <input
+                          data-testid="input-contact"
+                          name="contact"
+                          value={form.contact}
+                          onChange={handleChange}
+                          required
+                          placeholder="مثال: 0770000000 أو example@gmail.com"
+                          className="w-full border border-border rounded-xl px-4 py-3 bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary text-right"
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        data-testid="button-submit-form"
+                        className="w-full bg-primary text-primary-foreground py-4 rounded-xl font-bold text-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-md hover:-translate-y-0.5"
+                      >
+                        <Send size={18} />
+                        إرسال الطلب
+                      </button>
+                    </form>
+                  </>
+                )}
+              </DialogContent>
+            </Dialog>
           </motion.div>
         </div>
       </section>
