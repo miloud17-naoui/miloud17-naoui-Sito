@@ -1,0 +1,334 @@
+import { ReactNode } from "react";
+import { motion } from "framer-motion";
+import { 
+  Heart, 
+  Stethoscope, 
+  BookOpen, 
+  Users, 
+  Bus, 
+  Megaphone,
+  UserPlus,
+  Mail,
+  ChevronLeft
+} from "lucide-react";
+import heroImg from "../assets/images/hero.png";
+import volunteerImg from "../assets/images/volunteer.png";
+import teamImg from "../assets/images/team.png";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+export default function Home() {
+  return (
+    <div className="min-h-screen bg-background text-foreground overflow-hidden font-sans selection:bg-accent/30">
+      
+      {/* Navbar */}
+      <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
+        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground shadow-md">
+              <Stethoscope size={24} />
+            </div>
+            <span className="font-bold text-xl tracking-tight text-primary">رواد كلية الطب</span>
+          </div>
+          <div className="hidden md:flex items-center gap-8 text-sm font-semibold">
+            <a href="#about" className="hover:text-primary transition-colors">من نحن</a>
+            <a href="#goals" className="hover:text-primary transition-colors">أهدافنا</a>
+            <a href="#values" className="hover:text-primary transition-colors">قيمنا</a>
+            <a href="#join" className="bg-accent text-accent-foreground px-5 py-2 rounded-full hover:brightness-110 transition-all shadow-sm">انضم إلينا</a>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative min-h-[90vh] flex items-center pt-20">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-transparent z-10" />
+          <img src={heroImg} alt="Medical students in corridor" className="w-full h-full object-cover object-center" />
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="max-w-3xl"
+          >
+            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 text-secondary border border-secondary/20 mb-6">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+              </span>
+              <span className="text-sm font-semibold">التسجيل مفتوح للدفعة الجديدة</span>
+            </motion.div>
+            
+            <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-black leading-[1.1] mb-6 text-foreground">
+              رواد في <span className="text-primary">العلم</span>... <br/>
+              رواد في <span className="text-secondary">العطاء</span>...
+            </motion.h1>
+            
+            <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-muted-foreground mb-10 font-medium max-w-2xl leading-relaxed">
+              ومخلصون للمهنة. نحن خلية طلابية تجمع طلاب الطب لدعم مسيرتهم الأكاديمية والمهنية، وتعزيز التعاون، وتجسيد القيم الإنسانية النبيلة.
+            </motion.p>
+            
+            <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
+              <a href="#join" className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center gap-2">
+                كن جزءاً منا <ChevronLeft size={20} />
+              </a>
+              <a href="#about" className="bg-card text-card-foreground border border-border px-8 py-4 rounded-full font-bold text-lg hover:bg-muted transition-all flex items-center gap-2">
+                اكتشف المزيد
+              </a>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-24 bg-card">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+            >
+              <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-6 text-primary">أين يلتقي العلم بالإنسانية</motion.h2>
+              <motion.p variants={fadeInUp} className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                في "رواد كلية الطب"، نؤمن بأن الطب ليس مجرد مهنة نكتسبها بعد سنوات من الدراسة، بل هو رسالة نبيلة تبدأ منذ اليوم الأول في الكلية.
+              </motion.p>
+              <motion.p variants={fadeInUp} className="text-lg text-muted-foreground leading-relaxed mb-8">
+                نحن بيئة حاضنة للطلاب، نسعى لسد الفجوة بين الحياة الأكاديمية والعمل المجتمعي، لبناء طبيب متكامل يمتلك المعرفة، المهارة، والرحمة.
+              </motion.p>
+              <motion.div variants={fadeInUp} className="grid grid-cols-2 gap-6">
+                <div className="border-r-4 border-accent pr-4">
+                  <h4 className="text-3xl font-black text-foreground mb-1">+500</h4>
+                  <p className="text-sm text-muted-foreground font-semibold">طالب مستفيد</p>
+                </div>
+                <div className="border-r-4 border-secondary pr-4">
+                  <h4 className="text-3xl font-black text-foreground mb-1">+20</h4>
+                  <p className="text-sm text-muted-foreground font-semibold">حملة إنسانية</p>
+                </div>
+              </motion.div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-3xl blur-2xl -z-10" />
+              <img src={teamImg} alt="Students studying" className="rounded-2xl shadow-2xl relative z-10 w-full object-cover" />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Goals / Activities */}
+      <section id="goals" className="py-24 bg-background relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-secondary/5 blur-[120px] rounded-full" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <h2 className="text-3xl md:text-5xl font-black mb-6 text-foreground">مجالات عملنا</h2>
+            <p className="text-lg text-muted-foreground">نعمل من خلال مسارات متعددة لضمان التطور الشامل لطالب الطب، من مقاعد الدراسة إلى خدمة المجتمع.</p>
+          </motion.div>
+
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerContainer}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            <GoalCard 
+              icon={<BookOpen />} 
+              title="الدعم الأكاديمي والتطوير" 
+              desc="ورش عمل، دورات تدريبية، وجلسات مراجعة لمساعدة الطلاب على التفوق الأكاديمي."
+              color="bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20"
+            />
+            <GoalCard 
+              icon={<Heart />} 
+              title="الحملات الإنسانية" 
+              desc="حملات التبرع بالدم، التوعية الصحية، والمبادرات التطوعية لخدمة المجتمع."
+              color="bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20"
+            />
+            <GoalCard 
+              icon={<Bus />} 
+              title="القوافل والرحلات" 
+              desc="رحلات ميدانية للمناطق النائية لتقديم الرعاية وتعزيز الحس المجتمعي."
+              color="bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20"
+            />
+            <GoalCard 
+              icon={<UserPlus />} 
+              title="زيارات المرضى" 
+              desc="زيارات دورية للمستشفيات لتقديم الدعم النفسي والمعنوي للمرضى."
+              color="bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20"
+            />
+            <GoalCard 
+              icon={<Users />} 
+              title="المؤتمرات والندوات" 
+              desc="تنظيم والمشاركة في الفعاليات الطبية لتوسيع المدارك ومواكبة التطورات."
+              color="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20"
+            />
+            <GoalCard 
+              icon={<Megaphone />} 
+              title="التواصل مع الإدارة" 
+              desc="نكون همزة الوصل بين الطلاب وإدارة الكلية لإيصال وتلبية احتياجاتهم."
+              color="bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/20"
+            />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section id="values" className="py-24 bg-primary text-primary-foreground relative">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+            >
+              <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-black mb-8 leading-tight">الطب ليس مجرد دراسة،<br/>إنه أسلوب حياة.</motion.h2>
+              
+              <div className="space-y-6">
+                <motion.div variants={fadeInUp} className="flex gap-4">
+                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                    <span className="font-bold text-xl text-accent">1</span>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold mb-2">روح الفريق</h4>
+                    <p className="text-primary-foreground/80 leading-relaxed">العمل الجماعي هو أساس نجاحنا. نتعاون وندعم بعضنا البعض في كل خطوة.</p>
+                  </div>
+                </motion.div>
+                
+                <motion.div variants={fadeInUp} className="flex gap-4">
+                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                    <span className="font-bold text-xl text-accent">2</span>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold mb-2">المبادرة</h4>
+                    <p className="text-primary-foreground/80 leading-relaxed">لا ننتظر التغيير، بل نصنعه. نبادر في تقديم الحلول والمشاريع الهادفة.</p>
+                  </div>
+                </motion.div>
+                
+                <motion.div variants={fadeInUp} className="flex gap-4">
+                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                    <span className="font-bold text-xl text-accent">3</span>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold mb-2">الإنسانية أولاً</h4>
+                    <p className="text-primary-foreground/80 leading-relaxed">الرحمة والتعاطف هما البوصلة التي توجه جميع نشاطاتنا وتفاعلاتنا.</p>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <img src={volunteerImg} alt="Volunteering" className="rounded-2xl shadow-2xl w-full border-4 border-white/10" />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA / Join */}
+      <section id="join" className="py-32 bg-card text-center">
+        <div className="container mx-auto px-6">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="max-w-2xl mx-auto"
+          >
+            <div className="w-20 h-20 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mx-auto mb-8">
+              <Mail size={32} />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black mb-6 text-foreground">هل أنت مستعد لتكون رائداً؟</h2>
+            <p className="text-xl text-muted-foreground mb-10 leading-relaxed">
+              انضم إلينا اليوم لتكن جزءاً من التغيير، طور مهاراتك، وساهم في بناء مجتمع طبي واعٍ ومسؤول.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <button data-testid="button-join-form" className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/90 transition-all shadow-lg hover:-translate-y-1 w-full sm:w-auto">
+                نموذج الانضمام
+              </button>
+              <button data-testid="button-contact-us" className="bg-transparent border-2 border-primary text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/5 transition-all w-full sm:w-auto">
+                تواصل معنا
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-background border-t border-border py-12">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex items-center gap-3">
+              <Stethoscope size={24} className="text-primary" />
+              <span className="font-bold text-xl text-foreground">رواد كلية الطب</span>
+            </div>
+            <p className="text-muted-foreground font-medium text-center">
+              رواد في العلم... رواد في العطاء... ومخلصون للمهنة.
+            </p>
+            <div className="flex gap-4 text-muted-foreground">
+              {/* Social links placeholders */}
+              <div className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:bg-muted cursor-pointer transition-colors">
+                <span className="font-bold text-sm">X</span>
+              </div>
+              <div className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:bg-muted cursor-pointer transition-colors">
+                <span className="font-bold text-sm">In</span>
+              </div>
+            </div>
+          </div>
+          <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+            © {new Date().getFullYear()} رواد كلية الطب. جميع الحقوق محفوظة.
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+function GoalCard({ icon, title, desc, color }: { icon: ReactNode, title: string, desc: string, color: string }) {
+  return (
+    <motion.div 
+      variants={fadeInUp}
+      className="bg-card border border-border rounded-2xl p-8 hover:shadow-xl transition-all hover:-translate-y-2 group"
+    >
+      <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 border ${color} transition-transform group-hover:scale-110`}>
+        {icon}
+      </div>
+      <h3 className="text-xl font-bold mb-4 text-foreground">{title}</h3>
+      <p className="text-muted-foreground leading-relaxed">{desc}</p>
+    </motion.div>
+  );
+}

@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Pioneers of the College of Medicine"
+version = "1.0.0"
+id = "artifacts/pioneers-med"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24273
+
+[services.development]
+run = "pnpm --filter @workspace/pioneers-med run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/pioneers-med", "run", "build" ]
+publicDir = "artifacts/pioneers-med/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24273"
+BASE_PATH = "/"

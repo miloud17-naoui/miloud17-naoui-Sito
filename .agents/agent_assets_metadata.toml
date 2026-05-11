@@ -1,0 +1,20 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "NgexTzD0-BXWaWW-YMH1r"
+uri = "file://artifacts/pioneers-med/src/assets/images/hero.png"
+type = "image"
+title = "Medical students in hospital corridor"
+
+[[generated]]
+id = "hj88sHeCmG43sCV24DfSj"
+uri = "file://artifacts/pioneers-med/src/assets/images/volunteer.png"
+type = "image"
+title = "Medical students volunteer campaign"
+
+[[generated]]
+id = "dFgY5qBiILqOCFMXO5S7u"
+uri = "file://artifacts/pioneers-med/src/assets/images/team.png"
+type = "image"
+title = "Medical students studying together"

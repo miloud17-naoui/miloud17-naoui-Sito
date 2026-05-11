@@ -1,36 +1,49 @@
-# [Project name]
+# رواد كلية الطب — Pioneers of the College of Medicine
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A beautiful Arabic landing page for the "Pioneers of the College of Medicine" student cell — a space where medical students come together to support each other academically, professionally, and humanitarianly.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/pioneers-med run dev` — run the frontend (port 24273)
+- `pnpm --filter @workspace/api-server run dev` — run the API server (port 8080)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Frontend: React + Vite, Tailwind CSS, Framer Motion, shadcn/ui
+- API: Express 5 (scaffold only, not used by the landing page)
+- Routing: wouter
+- Font: Cairo (Google Fonts, Arabic)
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/pioneers-med/` — the main React+Vite landing page
+- `artifacts/pioneers-med/src/pages/Home.tsx` — the full single-page landing
+- `artifacts/pioneers-med/src/index.css` — theme (medical blue + teal + gold/amber palette, Cairo font)
+- `artifacts/pioneers-med/src/assets/images/` — AI-generated hero/team/volunteer images
+- `artifacts/pioneers-med/index.html` — RTL HTML shell (`lang="ar" dir="rtl"`)
+- `artifacts/api-server/` — shared Express API server (scaffold, unused by this app)
+- `lib/api-spec/openapi.yaml` — API contract (scaffold)
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Frontend-only app: no backend needed for a landing page; API server is present but unused.
+- RTL layout: `dir="rtl"` in index.html, Cairo Arabic font, all UI text in Arabic.
+- Framer Motion scroll-triggered animations for section reveal effects.
+- AI-generated images (hero.png, team.png, volunteer.png) for visual richness.
+- Theme: deep medical blue (primary), teal (secondary), warm gold/amber (accent).
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+A single-page Arabic landing site for the "رواد كلية الطب" student cell with:
+- Cinematic hero with the cell motto
+- About / mission section
+- 6 goals/activities grid with icons
+- Values section with imagery
+- Join/contact CTA
+- Footer with social links
 
 ## User preferences
 
@@ -38,7 +51,8 @@ _Populate as you build — explicit user instructions worth remembering across s
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Google Font `@import url(...)` must be the very first line of index.css (before `@import "tailwindcss"`).
+- The `GoalCard` helper component is defined at the bottom of Home.tsx (below the default export).
 
 ## Pointers
 
