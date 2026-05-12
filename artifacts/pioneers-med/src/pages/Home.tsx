@@ -36,42 +36,7 @@ import heroImg from "../assets/images/hero.png";
 import volunteerImg from "../assets/images/volunteer.png";
 import teamImg from "../assets/images/team.png";
 import logoImg from "../assets/images/logo.jpg";
-
-const EVENTS = [
-  {
-    id: 1,
-    title: "يوم التبرع بالدم",
-    desc: "حملة تبرع بالدم بالتنسيق مع المستشفى الجامعي لورقلة — انضم وأنقذ حياة.",
-    date: "20 مايو 2026",
-    time: "09:00 — 14:00",
-    location: "مستشفى ورقلة",
-    badge: "حملة إنسانية",
-    badgeClass: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-    color: "bg-red-500",
-  },
-  {
-    id: 2,
-    title: "ورشة الإسعافات الأولية",
-    desc: "تدريب عملي على مهارات الإسعاف الأساسية لطلاب السنة الأولى والثانية.",
-    date: "28 مايو 2026",
-    time: "10:00 — 13:00",
-    location: "كلية الطب — قاعة المحاضرات",
-    badge: "تطوير أكاديمي",
-    badgeClass: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-    color: "bg-blue-500",
-  },
-  {
-    id: 3,
-    title: "زيارة المرضى في دار العجزة",
-    desc: "مبادرة إنسانية لزيارة كبار السن وتقديم الدعم النفسي والمادي لهم.",
-    date: "5 يونيو 2026",
-    time: "09:30 — 12:00",
-    location: "دار العجزة — ورقلة",
-    badge: "نشاط تطوعي",
-    badgeClass: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-    color: "bg-green-500",
-  },
-];
+import EVENTS from "../data/events.json";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
