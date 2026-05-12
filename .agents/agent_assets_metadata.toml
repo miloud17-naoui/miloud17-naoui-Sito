@@ -1,5 +1,4 @@
 uploads = []
-outputs = []
 
 [[generated]]
 id = "NgexTzD0-BXWaWW-YMH1r"
@@ -18,3 +17,9 @@ id = "dFgY5qBiILqOCFMXO5S7u"
 uri = "file://artifacts/pioneers-med/src/assets/images/team.png"
 type = "image"
 title = "Medical students studying together"
+
+[[outputs]]
+id = "HKvqPDKV0YNOiqrekLgdH"
+uri = "file://pioneers-med-site.tar.gz"
+type = "unspecified"
+title = "ملفات الموقع الجاهزة للنشر"
