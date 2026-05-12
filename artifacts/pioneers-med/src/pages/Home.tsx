@@ -19,7 +19,11 @@ import {
   Activity,
   ClipboardList,
   Radio,
-  GraduationCap
+  GraduationCap,
+  CalendarDays,
+  Clock,
+  MapPin as MapPinIcon,
+  Sparkles
 } from "lucide-react";
 import {
   Dialog,
@@ -32,6 +36,42 @@ import heroImg from "../assets/images/hero.png";
 import volunteerImg from "../assets/images/volunteer.png";
 import teamImg from "../assets/images/team.png";
 import logoImg from "../assets/images/logo.jpg";
+
+const EVENTS = [
+  {
+    id: 1,
+    title: "يوم التبرع بالدم",
+    desc: "حملة تبرع بالدم بالتنسيق مع المستشفى الجامعي لورقلة — انضم وأنقذ حياة.",
+    date: "20 مايو 2026",
+    time: "09:00 — 14:00",
+    location: "مستشفى ورقلة",
+    badge: "حملة إنسانية",
+    badgeClass: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+    color: "bg-red-500",
+  },
+  {
+    id: 2,
+    title: "ورشة الإسعافات الأولية",
+    desc: "تدريب عملي على مهارات الإسعاف الأساسية لطلاب السنة الأولى والثانية.",
+    date: "28 مايو 2026",
+    time: "10:00 — 13:00",
+    location: "كلية الطب — قاعة المحاضرات",
+    badge: "تطوير أكاديمي",
+    badgeClass: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+    color: "bg-blue-500",
+  },
+  {
+    id: 3,
+    title: "زيارة المرضى في دار العجزة",
+    desc: "مبادرة إنسانية لزيارة كبار السن وتقديم الدعم النفسي والمادي لهم.",
+    date: "5 يونيو 2026",
+    time: "09:30 — 12:00",
+    location: "دار العجزة — ورقلة",
+    badge: "نشاط تطوعي",
+    badgeClass: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
+    color: "bg-green-500",
+  },
+];
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -120,6 +160,7 @@ export default function Home() {
           <div className="hidden md:flex items-center gap-8 text-sm font-semibold">
             <a href="#about" className="hover:text-primary transition-colors">من نحن</a>
             <a href="#goals" className="hover:text-primary transition-colors">أهدافنا</a>
+            <a href="#events" className="hover:text-primary transition-colors">أحداثنا</a>
             <a href="#bureau" className="hover:text-primary transition-colors">المكتب</a>
             <a href="#values" className="hover:text-primary transition-colors">قيمنا</a>
             <a href="#join" className="bg-accent text-accent-foreground px-5 py-2 rounded-full hover:brightness-110 transition-all shadow-sm">انضم إلينا</a>
@@ -273,6 +314,80 @@ export default function Home() {
               desc="نكون همزة الوصل بين الطلاب وإدارة الكلية لإيصال وتلبية احتياجاتهم."
               color="bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/20"
             />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Events Section */}
+      <section id="events" className="py-24 bg-card relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-secondary/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-accent/5 blur-[120px] rounded-full" />
+
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center max-w-2xl mx-auto mb-16"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 text-secondary border border-secondary/20 mb-4">
+              <Sparkles size={14} />
+              <span className="text-sm font-semibold">ما يجري عندنا</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black mb-4 text-foreground">أحداثنا وفعالياتنا</h2>
+            <p className="text-lg text-muted-foreground">آخر النشاطات والتظاهرات التي تنظمها خلية رواد كلية الطب ورقلة.</p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerContainer}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {EVENTS.map((ev) => (
+              <motion.div
+                key={ev.id}
+                variants={fadeInUp}
+                className="bg-background border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 group flex flex-col"
+              >
+                {/* Colour stripe */}
+                <div className={`h-2 w-full ${ev.color}`} />
+
+                <div className="p-6 flex flex-col flex-1 gap-4">
+                  {/* Date + location row */}
+                  <div className="flex flex-wrap gap-3 text-xs font-semibold text-muted-foreground">
+                    <span className="flex items-center gap-1">
+                      <CalendarDays size={13} className="text-secondary" />
+                      {ev.date}
+                    </span>
+                    {ev.time && (
+                      <span className="flex items-center gap-1">
+                        <Clock size={13} className="text-secondary" />
+                        {ev.time}
+                      </span>
+                    )}
+                    {ev.location && (
+                      <span className="flex items-center gap-1">
+                        <MapPinIcon size={13} className="text-accent" />
+                        {ev.location}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Badge */}
+                  <span className={`self-start text-xs font-bold px-2 py-0.5 rounded-full ${ev.badgeClass}`}>
+                    {ev.badge}
+                  </span>
+
+                  <h3 className="text-lg font-black text-foreground leading-snug group-hover:text-primary transition-colors">
+                    {ev.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed flex-1">{ev.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
