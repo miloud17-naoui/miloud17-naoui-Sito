@@ -12,7 +12,14 @@ import {
   ChevronLeft,
   MapPin,
   CheckCircle2,
-  Send
+  Send,
+  Crown,
+  Shield,
+  Calendar,
+  Activity,
+  ClipboardList,
+  Radio,
+  GraduationCap
 } from "lucide-react";
 import {
   Dialog,
@@ -114,6 +121,7 @@ export default function Home() {
           <div className="hidden md:flex items-center gap-8 text-sm font-semibold">
             <a href="#about" className="hover:text-primary transition-colors">من نحن</a>
             <a href="#goals" className="hover:text-primary transition-colors">أهدافنا</a>
+            <a href="#bureau" className="hover:text-primary transition-colors">المكتب</a>
             <a href="#values" className="hover:text-primary transition-colors">قيمنا</a>
             <a href="#join" className="bg-accent text-accent-foreground px-5 py-2 rounded-full hover:brightness-110 transition-all shadow-sm">انضم إلينا</a>
           </div>
@@ -266,6 +274,98 @@ export default function Home() {
               desc="نكون همزة الوصل بين الطلاب وإدارة الكلية لإيصال وتلبية احتياجاتهم."
               color="bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/20"
             />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Bureau Section */}
+      <section id="bureau" className="py-24 bg-card relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-accent/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-primary/5 blur-[120px] rounded-full" />
+
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center max-w-2xl mx-auto mb-16"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent border border-accent/20 mb-4">
+              <Crown size={14} />
+              <span className="text-sm font-semibold">الهيئة الإدارية</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black mb-4 text-foreground">المكتب التنفيذي</h2>
+            <p className="text-lg text-muted-foreground">الفريق المشرف على قيادة الخلية وتنظيم نشاطاتها.</p>
+          </motion.div>
+
+          {/* President — centred & larger */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="flex justify-center mb-8"
+          >
+            <div className="bg-background border-2 border-accent/40 rounded-2xl p-8 flex flex-col items-center gap-4 shadow-xl w-64 hover:-translate-y-2 transition-transform">
+              <div className="w-16 h-16 rounded-full bg-accent/10 border-2 border-accent/30 flex items-center justify-center text-accent">
+                <Crown size={28} />
+              </div>
+              <div className="text-center">
+                <p className="text-xs font-bold uppercase tracking-widest text-accent mb-1">رئيس الخلية</p>
+                <h3 className="text-2xl font-black text-foreground">حسنى</h3>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Vice president */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="flex justify-center mb-10"
+          >
+            <div className="bg-background border border-border rounded-2xl p-6 flex flex-col items-center gap-3 shadow-md w-56 hover:-translate-y-2 transition-transform">
+              <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                <Shield size={22} />
+              </div>
+              <div className="text-center">
+                <p className="text-xs font-semibold text-muted-foreground mb-1">النائب</p>
+                <h3 className="text-xl font-black text-foreground">نوي ميلود</h3>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Rest of bureau */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerContainer}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
+          >
+            {[
+              { role: "مسؤول التظاهرات", name: "ياسمين", icon: <Calendar size={20} /> },
+              { role: "مسؤول النشاطات",  name: "هدى",    icon: <Activity size={20} /> },
+              { role: "مسؤول الإدارة والتنظيم", name: "آية", icon: <ClipboardList size={20} /> },
+              { role: "مسؤول الإعلام",   name: "تقوى",   icon: <Radio size={20} /> },
+              { role: "مسؤول بيداغوجيا", name: "فاطمة",  icon: <GraduationCap size={20} /> },
+            ].map(({ role, name, icon }) => (
+              <motion.div
+                key={name}
+                variants={fadeInUp}
+                className="bg-background border border-border rounded-2xl p-5 flex flex-col items-center gap-3 text-center hover:-translate-y-2 transition-transform hover:shadow-lg"
+              >
+                <div className="w-11 h-11 rounded-full bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary">
+                  {icon}
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground font-semibold mb-1 leading-tight">{role}</p>
+                  <h3 className="text-lg font-black text-foreground">{name}</h3>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
