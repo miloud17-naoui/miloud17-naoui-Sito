@@ -23,3 +23,9 @@ id = "HKvqPDKV0YNOiqrekLgdH"
 uri = "file://pioneers-med-site.tar.gz"
 type = "unspecified"
 title = "ملفات الموقع الجاهزة للنشر"
+
+[[outputs]]
+id = "ruBjTC3hn-BdySMWxvNwi"
+uri = "file://pioneers-med-index.tar.gz"
+type = "unspecified"
+title = "index.html — كل شيء في ملف واحد"
