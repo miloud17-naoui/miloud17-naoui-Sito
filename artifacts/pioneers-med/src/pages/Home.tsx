@@ -31,6 +31,7 @@ import {
 import heroImg from "../assets/images/hero.png";
 import volunteerImg from "../assets/images/volunteer.png";
 import teamImg from "../assets/images/team.png";
+import logoImg from "../assets/images/logo.jpg";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -113,9 +114,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground shadow-md">
-              <Stethoscope size={24} />
-            </div>
+            <img src={logoImg} alt="شعار كلية الطب" className="w-11 h-11 rounded-full object-cover shadow-md border border-border" />
             <span className="font-bold text-xl tracking-tight text-primary">رواد كلية الطب ورقلة</span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-semibold">
@@ -642,7 +641,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-3">
-                <Stethoscope size={24} className="text-primary" />
+                <img src={logoImg} alt="شعار كلية الطب" className="w-10 h-10 rounded-full object-cover border border-border" />
                 <span className="font-bold text-xl text-foreground">رواد كلية الطب ورقلة</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground text-sm">
